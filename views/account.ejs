@@ -1,0 +1,70 @@
+<!--Sabrina Meng Neha Maddali Q4 Project May 19, 2020-->
+
+<!--this page allows the user to create an account for MedShop-->
+<!DOCTYPE html>
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/>
+
+<!--create account form-->
+<div class="container">
+<h1>Create Account</h1>
+<br/>
+<form action="/message" method = "POST">
+  <div class="form-group">
+    <label for="username">Username*:</label>
+    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required="true">
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="password">Password*:</label>
+    <input type="password" class="form-control" placeholder="Password" name="pwd" id="pwd" required="true">
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="password">Confirm Password*:</label>
+    <input type="password" class="form-control" placeholder="Confirm Password" name="conf" id="conf" required="true" onkeyup="checkPwd()">
+  </div>
+  <br/>
+  <div id="checkPwd" class="red"></div>
+  <br/>
+  <button type="submit" class="btn btn-default" id = "submit">Create Account</button>
+</form>
+</div>
+<br/><br/>
+
+<!--include footer page-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+
+<script>
+//checking if passwords match as user enters their password
+	function checkPwd() {
+		if(document.getElementById("pwd").value == document.getElementById("conf").value) {
+			document.getElementById("checkPwd").innerHTML = "OK";
+		}
+		else {
+			document.getElementById("checkPwd").innerHTML = "Passwords do not match";
+		}
+	}
+</script>
+</html>

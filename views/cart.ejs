@@ -1,0 +1,116 @@
+<!--Sabrina and Neha Quarter Project 5/19-->
+<!--this page shows the user what is in their cart-->
+
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/>
+
+<!--print the user's name-->
+<div class = "container">
+	<h1>Welcome to your cart, <%= user %>!</h1>
+<br/><br/>
+
+<!--display the items in their cart in a table format-->
+<form action="/cart" method="POST">
+<table class="table">
+	<tr>
+		<th class = "col-lg-2">Remove item</th>
+		<th class = "col-lg-4">Item Name</th>
+		<th class = "col-lg-3">Quantity</th>
+		<th class = "col-lg-3">Total Price</th>
+	</tr>
+
+	<% var count=0; %>
+	<% for(var i=0; i<data.length; i++) { %>
+		<tr>
+			<td class = "col-lg-2 center"><input type="checkbox" name="check" value="<%= data[i].itemName %>"></td>
+			<td class = "col-lg-4"><%= data[i].itemName %></td>
+			<td class = "col-lg-3"><%= data[i].qty %></td>
+			<td class = "col-lg-3">$<%= (parseInt(data[i].unitPrice)*parseInt(data[i].qty)).toFixed(2) %></td>
+			
+			<!--price (unit price x quantity)-->
+			<% var price= parseFloat(parseFloat(data[i].unitPrice)*parseFloat(data[i].qty)); %>
+			<% var count=parseFloat(parseFloat(count)+parseFloat(price)).toFixed(2); %>
+		</tr>
+	<% } %>
+
+	<!--adding shipping costs-->
+	<tr>
+		<td class="center"><strong>Shipping:</strong></td>
+		<td></td>
+		<td></td>
+		<% if(count==0.00) { %>
+			<td><strong>$0.00</strong></td>
+			<% var ship = 0.00; %>
+		<% } %>
+		<% if(count<=30.00 && count>0.00) { %>
+			<td><strong>$5.00</strong></td>
+			<% var ship = 5.00; %>
+		<% } %>
+		<% if(count<=50.00 && count>30.00) { %>
+			<td><strong>$7.00</strong></td>
+			<% var ship = 7.00; %>
+		<% } %>
+		<% if(count<=100.00 && count>50.00) { %>
+			<td><strong>$10.00</strong></td>
+			<% var ship = 10.00; %>
+		<% } %>
+		<% if(count>100.00){ %>
+			<td><strong>$12.00</strong></td>
+			<% var ship = 12.00; %>
+		<% } %>
+
+	</tr>
+	<tr>
+		<td class="center"><strong>Total Bill:</strong></td>
+		<td></td>
+		<td></td>
+		<td><strong>$<%= parseFloat(parseFloat(count) + ship).toFixed(2) %></strong></td>
+	</tr>
+
+</table>
+
+<button class="btn btn-primary" type="submit">Remove Checked Items</button>
+
+</form>
+
+<!--If nothing has been ordered, you cannot proceed to checkout-->
+<% if(parseFloat(parseFloat(count) + ship).toFixed(2) == 0.00) { %>
+<div class="right">
+	<a href="/details"<button class="btn btn-success bigFont" disabled>Proceed to Checkout <span class="glyphicon glyphicon-chevron-right"></span></button></a>
+</div>
+<% } %>
+
+<!--If items in cart, then you can checkout-->
+<% if(parseFloat(parseFloat(count) + ship).toFixed(2) > 0.00) { %>
+<div class="right">
+	<a href="/details"<button class="btn btn-success bigFont">Proceed to Checkout <span class="glyphicon glyphicon-chevron-right"></span></button></a>
+</div>
+<% } %>
+
+</div>
+
+<br/><br/>
+
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+</html>

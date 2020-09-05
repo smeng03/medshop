@@ -1,0 +1,109 @@
+<!--Sabrina and Neha Quarter Project 5/19-->
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/>
+
+<!--confirm page on the user's purchased items-->
+<div class = "container">
+	<h1>We have received <%= user %>'s order!</h1>
+<br/><br/>
+
+<table class="table">
+	<tr>
+		<th class = "col-lg-4">Item Name</th>
+		<th class = "col-lg-4">Quantity</th>
+		<th class = "col-lg-4">Total Price</th>
+	</tr>
+
+	<% var count=0; %>
+	<% for(var i=0; i<data.length; i++) { %>
+		<tr>
+			<td class = "col-lg-4"><%= data[i].itemName %></td>
+			<td class = "col-lg-4"><%= data[i].qty %></td>
+			<td class = "col-lg-4">$<%= (parseInt(data[i].unitPrice)*parseInt(data[i].qty)).toFixed(2) %></td>
+			<% var price= parseFloat(parseFloat(data[i].unitPrice)*parseFloat(data[i].qty)); %>
+			<% var count=parseFloat(parseFloat(count)+parseFloat(price)).toFixed(2); %>
+		</tr>
+	<% } %>
+
+	<tr>
+		<td><strong>Shipping:</strong></td>
+		<td></td>
+		<% if(count==0.00) { %>
+			<td><strong>$0.00</strong></td>
+			<% var ship = 0.00; %>
+		<% } %>
+		<% if(count<=30.00 && count>0.00) { %>
+			<td><strong>$5.00</strong></td>
+			<% var ship = 5.00; %>
+		<% } %>
+		<% if(count<=50.00 && count>30.00) { %>
+			<td><strong>$7.00</strong></td>
+			<% var ship = 7.00; %>
+		<% } %>
+		<% if(count<=100.00 && count>50.00) { %>
+			<td><strong>$10.00</strong></td>
+			<% var ship = 10.00; %>
+		<% } %>
+		<% if(count>100.00){ %>
+			<td><strong>$12.00</strong></td>
+			<% var ship = 12.00; %>
+		<% } %>
+
+	</tr>
+	<tr>
+		<td><strong>Total Bill:</strong></td>
+		<td></td>
+		<td><strong>$<%= parseFloat(parseFloat(count) + ship).toFixed(2) %></strong></td>
+	</tr>
+
+</table>
+<br/><br/>
+
+<!--Order confirmation details-->
+<div id="flip">
+	<h3><strong>View Order Confirmation Details</strong></h3>
+</div>
+<div id="panel">
+	<h4><strong>Name: </strong><%= name %></h4>
+	<h4><strong>Shipping Address: </strong><%= address %></h4>
+	<h4><strong>Payment Method: </strong><%= payment %></h4>
+	<h4><strong>Confirmation Number: </strong><%= confNum %></h4>
+</div>
+</div>
+
+<br/><br/>
+
+<!--include footer page-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+
+<script>
+//JQuery for sliding panel to view order confirmation details 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
+});
+</script>
+
+</html>

@@ -1,0 +1,158 @@
+<!--Sabrina Meng Neha Maddali Q4 Project May 19, 2020-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+  <!--for the comment section--><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/><br/>
+
+<!--display the products in a proper fashion for the user to see-->
+<div class="container">
+<h1 style="text-align: center;">Our Products</h1>
+
+<!--checks if action variable is null (is not null once user adds something to cart-->
+<br/>
+	<% if(action != null) { %>
+		<div class="red">
+			<h2><%= action %></h2>
+		</div>
+	<% } %>
+	<br/>
+
+	<hr style="height:2px;border-width:0;color:#bfbfbf;background-color:#bfbfbf"><br/>
+	
+  <!--use the descriptions in the database to display on the products page for the user to see-->
+	<% for(var i=0; i<data.length; i++) { %>
+		<div class="media">
+		  <div class="media-left">
+			<img src="<%= data[i].img %>" class="media-object" style="width:200px">
+		  </div>
+		  <div class="media-body">
+  			<strong><h4 class="media-heading"><%= data[i].item %></h4></strong>
+  			<strong><p>Product Description: </strong><%= data[i].description %></p>
+  			<strong><p>Quantity: </strong><%= data[i].qty %></p>
+  			<strong><p>Price: </strong>$<%= data[i].price %></p>
+  			<button id="myBtn" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%= i%>">More Info/Add to Cart</button>
+		  </div>
+
+    <!--if the user clicks the more info/add to cart button then a modal with more inforamtion will pop up-->
+		<!-- Modal -->
+		<div id="myModal<%= i %>" class="modal" role="dialog">
+		  <div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h1 class="modal-title"><%= data[i].item %></h1>
+			  </div>
+			  <div class="modal-body">
+				<div class="media">
+					<div class="media-left">
+					  <img src="<%= data[i].img %>" class="media-object" style="width:200px">
+					</div>
+					<div class="media-body">
+					  <h3 style="color:red;">Sale!</h3>
+					  <h2 style="color:red;">$<%= data[i].price %></h2>
+					  <hr>
+					  <h4>Quantity</h4>
+
+					<!--change quantity button-->
+					<!--form to add product to cart-->
+					  <form action = "/shop" method = "POST">
+						  <div class="input-group">
+							<input type="button" value="-" class="button-minus" data-field="quantity">
+							<input type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
+							<input type="button" value="+" class="button-plus" data-field="quantity">
+						  </div>
+						  <input type="hidden"  name="item" value="<%= data[i].id %>">
+						  <input type="hidden"  name="name" value="<%= data[i].item %>">
+						  <input type="hidden"  name="unitPrice" value="<%= data[i].price %>">
+						  
+						  <!--user can change the quantity and add that number of products to the cart-->
+						  <button id="myBtn" class="btn btn-primary" type="submit">Add to Cart</button>
+					  </form>
+
+					  <hr>
+					  <h4>Product Details</h4>
+					  <ul>
+						<li><p><%= data[i].description %></p></li>
+						<li><p>Quantity: <%= data[i].qty %></p></li>
+					  </ul>
+					  <h4>Shipping and Returns</h4>
+						<p>View our shipping rates and return policy on the home page</p>
+				  </div>
+				</div>
+				<hr>
+			  </div>
+		</div>
+	</div>
+</div>
+</div>
+
+	<br/><hr style="height:2px;border-width:0;color:#bfbfbf;background-color:#bfbfbf"><br/>
+	<% } %>
+</div>
+
+<!--include the footer page-->
+<footer style="margin: 0px;">
+    <%- include('footer') %>
+</footer>
+
+<script>
+  //js code for the quantity button
+  //increase the number on the button
+  function incrementValue(e) {
+    e.preventDefault();
+    var fieldName = $(e.target).data('field');
+    var parent = $(e.target).closest('div');
+    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+    if (!isNaN(currentVal)) {
+      parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+    } else {
+      parent.find('input[name=' + fieldName + ']').val(0);
+    }
+  }
+  
+ // decrease the number on the button
+  function decrementValue(e) {
+    e.preventDefault();
+    var fieldName = $(e.target).data('field');
+    var parent = $(e.target).closest('div');
+    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+    if (!isNaN(currentVal) && currentVal > 0) {
+      parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+    } else {
+      parent.find('input[name=' + fieldName + ']').val(0);
+    }
+  }
+
+  $('.input-group').on('click', '.button-plus', function(e) {
+    incrementValue(e);
+  });
+
+  $('.input-group').on('click', '.button-minus', function(e) {
+    decrementValue(e);
+  });
+</script>
+</body>
+</html>

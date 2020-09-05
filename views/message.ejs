@@ -1,0 +1,39 @@
+<!--Sabrina Meng Neha Maddali Q4 Project May 19, 2020-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/><br/>
+
+<!--if the user has not logged in print this message on the page-->
+<div class="container">
+<h1><%= message %></h1>
+<a href="/"><h3><strong>Click here to return home</strong></h3></a>
+<a href="/account"><h3><strong>Click here to return to the "Create Account" page</strong></h3></a>
+</div>
+<br/><br/>
+
+<!--include the footer page-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+</html>

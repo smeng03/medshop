@@ -1,0 +1,103 @@
+<!--Sabrina Meng Neha Maddali Q4 Project May 19, 2020-->
+<!--page with information on MedShop and corona virus-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/>
+
+<div class="jumbotron" style="background-image: url('background.jpg'); color:black;">
+  <br><br>
+  <h1 style="text-align:center;">MedShop during COVID-19</h1>
+</div>
+
+<div style = "height:270px; background-color:black; color:white;text-align:justify;padding:100px 80px;">
+    <p style = "font-size:18pt;">In these unfortunate times, MedShop has been taking many precautions with employees as we package
+      your products to be delivered to you. And just a reminder, it's important to stay at home to slow the spread of the corona virus!
+      To find more about the corona virus, check out cdc.gov</p>
+</div>
+
+<div class = "one" style="background-image: url('background.jpg'); padding: 20px;">
+  <div class="description">
+    <h1 style="color:black; text-align:center;">Sanitation of Products</h1>
+  </div>
+</div>
+
+<div style = "height:250px; background-color:black; color:white;text-align:justify;padding:50px 80px;">
+    <p style = "font-size:18pt;">All of our employees are instructed to wash their hands and wear gloves before beginning work.
+    Mass are required at working stations. 6ft social distancing indicating tape lines have been placed on the floors of
+    working spaces to further stop the spread of COVID-19. All products are sanitized properly before packaged to be shipped to the
+    customer. </p>
+	<br/><br/>
+</div>
+
+<div class = "one" style="background-image: url('background.jpg'); padding: 20px;">">
+  <div class="description">
+    <h1 style="color:black; text-align:center;">What YOU could do in this Crisis</h1>
+  </div>
+</div>
+
+<div id="accordion" style = "height:320px; background-color:black; color:white;text-align:justify;padding:50px 80px;">
+  <h3>STAY at home as much as you can!</h3>
+  <div>
+    <p>
+    Although many states are easing on the stay at home orders, try to go outside only when necessary! Doing
+    so will slow the spread of corona virus!
+    </p>
+  </div>
+  <h3>KEEP a safe distance</h3>
+  <div>
+    <p>
+    Even though many states are easing on their stay at home orders, remember to stay 6 feet away
+    from people. Social distancing will stop the spread!
+    </p>
+  </div>
+  <h3>WASH your hands</h3>
+  <div>
+    <p>
+    Washing your hands often will get rid of many of the bad germs and bacteria. Also avoid
+    touching your face with dirty hands!
+    </p>
+  </div>
+  <h3>COVER your cough</h3>
+  <div>
+    <p>
+    Corona virus can spread easily through respiratory droplets produced when an infected person coughs, sneezes or talks.
+    These droplets can land in the mouths or noses of people who are nearby or possibly be inhaled
+    into the lungs.
+    </p>
+  </div>
+</div>
+
+<!--include the footer page-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+</html>

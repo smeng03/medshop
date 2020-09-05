@@ -1,0 +1,104 @@
+<!--Sabrina and Neha Quarter Project 5/19-->
+<!--intermediate page showing final order before proceeding to checkout-->
+
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/>
+
+<!--show the user their final purchase-->
+<form action="/checkout" method="POST">
+<div class = "container">
+	<h1>Finalizing <%= user %>'s order</h1>
+<br/>
+
+<% if(message != null) { %>
+	<div class="red"><h2><%= message %></h2></div>
+<% } %>
+<br/><br/>
+
+<table class="table">
+	<tr>
+		<th class = "col-lg-4">Item Name</th>
+		<th class = "col-lg-4">Quantity</th>
+		<th class = "col-lg-4">Total Price</th>
+	</tr>
+
+	<% var count=0; %>
+	<% for(var i=0; i<data.length; i++) { %>
+		<tr>
+			<td class = "col-lg-4"><%= data[i].itemName %></td>
+			<td class = "col-lg-4"><%= data[i].qty %></td>
+			<td class = "col-lg-4">$<%= (parseInt(data[i].unitPrice)*parseInt(data[i].qty)).toFixed(2) %></td>
+			<% var price= parseFloat(parseFloat(data[i].unitPrice)*parseFloat(data[i].qty)); %>
+			<% var count=parseFloat(parseFloat(count)+parseFloat(price)).toFixed(2); %>
+		</tr>
+	<% } %>
+
+	<tr>
+		<td><strong>Shipping:</strong></td>
+		<td></td>
+		<% if(count==0.00) { %>
+			<td><strong>$0.00</strong></td>
+			<% var ship = 0.00; %>
+		<% } %>
+		<% if(count<=30.00 && count>0.00) { %>
+			<td><strong>$5.00</strong></td>
+			<% var ship = 5.00; %>
+		<% } %>
+		<% if(count<=50.00 && count>30.00) { %>
+			<td><strong>$7.00</strong></td>
+			<% var ship = 7.00; %>
+		<% } %>
+		<% if(count<=100.00 && count>50.00) { %>
+			<td><strong>$10.00</strong></td>
+			<% var ship = 10.00; %>
+		<% } %>
+		<% if(count>100.00){ %>
+			<td><strong>$12.00</strong></td>
+			<% var ship = 12.00; %>
+		<% } %>
+
+	</tr>
+	<tr>
+		<td><strong>Total Bill:</strong></td>
+		<td></td>
+		<td><strong>$<%= parseFloat(parseFloat(count) + ship).toFixed(2) %></strong></td>
+	</tr>
+
+</table>
+<br/>
+
+<input type="hidden" name="total" value="<%= parseFloat(parseFloat(count) + ship).toFixed(2) %>">
+
+<!--take the user to their final payment-->
+<div class="right">
+	<button type="submit" class="btn btn-success bigFont">Proceed to Payment <span class="glyphicon glyphicon-chevron-right"></span></button>
+</div>
+</form>
+
+</div>
+<br/><br/>
+
+<!--include the footer page-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+</html>

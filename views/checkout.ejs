@@ -1,0 +1,267 @@
+<!--Sabrina and Neha Quarter Project 5/19-->
+<!--page when the user checks their items out-->
+
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/>
+
+<!--include the username-->
+<div class = "container">
+	<h1>Paying for <%= user %>'s order</h1>
+<br/><br/>
+
+<!--show the user what they are paying for-->
+<table class="table">
+	<tr>
+		<th class = "col-lg-4">Item Name</th>
+		<th class = "col-lg-4">Quantity</th>
+		<th class = "col-lg-4">Total Price</th>
+	</tr>
+
+	<% var count=0; %>
+	<% for(var i=0; i<data.length; i++) { %>
+		<tr>
+			<td class = "col-lg-4"><%= data[i].itemName %></td>
+			<td class = "col-lg-4"><%= data[i].qty %></td>
+			<td class = "col-lg-4">$<%= (parseInt(data[i].unitPrice)*parseInt(data[i].qty)).toFixed(2) %></td>
+			<% var price= parseFloat(parseFloat(data[i].unitPrice)*parseFloat(data[i].qty)); %>
+			<% var count=parseFloat(parseFloat(count)+parseFloat(price)).toFixed(2); %>
+		</tr>
+	<% } %>
+
+	<tr>
+		<td><strong>Shipping:</strong></td>
+		<td></td>
+		<% if(count==0.00) { %>
+			<td><strong>$0.00</strong></td>
+			<% var ship = 0.00; %>
+		<% } %>
+		<% if(count<=30.00 && count>0.00) { %>
+			<td><strong>$5.00</strong></td>
+			<% var ship = 5.00; %>
+		<% } %>
+		<% if(count<=50.00 && count>30.00) { %>
+			<td><strong>$7.00</strong></td>
+			<% var ship = 7.00; %>
+		<% } %>
+		<% if(count<=100.00 && count>50.00) { %>
+			<td><strong>$10.00</strong></td>
+			<% var ship = 10.00; %>
+		<% } %>
+		<% if(count>100.00){ %>
+			<td><strong>$12.00</strong></td>
+			<% var ship = 12.00; %>
+		<% } %>
+
+	</tr>
+	<tr>
+		<td><strong>Total Bill:</strong></td>
+		<td></td>
+		<td><strong>$<%= parseFloat(parseFloat(count) + ship).toFixed(2) %></strong></td>
+	</tr>
+
+</table>
+<br/>
+
+<!--form asking for infromation regarding shipping methods and payment-->
+<form action="/confirm" method = "POST">
+<h3>Name</h3>
+<br/>
+
+  <div class="form-group">
+    <label for="name">Name (First and Last)*:</label>
+    <input type="text" class="form-control" placeholder="Name" name="name" id="name" required="true">
+  </div>
+  <br/>
+
+  <h3>Shipping Address</h3>
+  <br/>
+  <div class="form-group">
+    <label for="address">Street Address*:</label>
+    <input type="text" class="form-control" placeholder="Street Address" name="street" id="street" required="true">
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="city">City*:</label>
+    <input type="text" class="form-control" placeholder="City" name="city" id="city" required="true">
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="state">State*:</label>
+	<select class="form-control" name="state" id="state">
+		<option value="AL">Alabama</option>
+		<option value="AK">Alaska</option>
+		<option value="AZ">Arizona</option>
+		<option value="AR">Arkansas</option>
+		<option value="CA">California</option>
+		<option value="CO">Colorado</option>
+		<option value="CT">Connecticut</option>
+		<option value="DE">Delaware</option>
+		<option value="DC">District Of Columbia</option>
+		<option value="FL">Florida</option>
+		<option value="GA">Georgia</option>
+		<option value="HI">Hawaii</option>
+		<option value="ID">Idaho</option>
+		<option value="IL">Illinois</option>
+		<option value="IN">Indiana</option>
+		<option value="IA">Iowa</option>
+		<option value="KS">Kansas</option>
+		<option value="KY">Kentucky</option>
+		<option value="LA">Louisiana</option>
+		<option value="ME">Maine</option>
+		<option value="MD">Maryland</option>
+		<option value="MA">Massachusetts</option>
+		<option value="MI">Michigan</option>
+		<option value="MN">Minnesota</option>
+		<option value="MS">Mississippi</option>
+		<option value="MO">Missouri</option>
+		<option value="MT">Montana</option>
+		<option value="NE">Nebraska</option>
+		<option value="NV">Nevada</option>
+		<option value="NH">New Hampshire</option>
+		<option value="NJ">New Jersey</option>
+		<option value="NM">New Mexico</option>
+		<option value="NY">New York</option>
+		<option value="NC">North Carolina</option>
+		<option value="ND">North Dakota</option>
+		<option value="OH">Ohio</option>
+		<option value="OK">Oklahoma</option>
+		<option value="OR">Oregon</option>
+		<option value="PA">Pennsylvania</option>
+		<option value="RI">Rhode Island</option>
+		<option value="SC">South Carolina</option>
+		<option value="SD">South Dakota</option>
+		<option value="TN">Tennessee</option>
+		<option value="TX">Texas</option>
+		<option value="UT">Utah</option>
+		<option value="VT">Vermont</option>
+		<option value="VA">Virginia</option>
+		<option value="WA">Washington</option>
+		<option value="WV">West Virginia</option>
+		<option value="WI">Wisconsin</option>
+		<option value="WY">Wyoming</option>
+	</select>
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="zip">Zip Code*:</label>
+    <input type="text" class="form-control" placeholder="Zip Code" name="zip" id="zip" required="true">
+  </div>
+  <br/>
+
+  <h3>Payment Method</h3>
+  <br/>
+  <div class="form-group">
+	  <label for="pay">Payment Method*:</label>
+	  <select class="form-control" name="payment" id="payment">
+	    <option value="Credit/Debit">Credit/Debit Card</option>
+	    <option value="PayPal">PayPal</option>
+	  </select>
+	  </div>
+  <br/>
+  <div class="form-group">
+    <label for="card">Card Number:</label>
+    <input type="password" class="form-control" placeholder="Card Number" name="card" id="card" onkeyup="checkNum()">
+  </div>
+  <br/>
+
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<div id="paypal-button"></div>
+<br/>
+
+<input type="checkbox" id="check"><span style="font-size: 12pt;"><strong> If using PayPal: </strong>I have completed my PayPal payment. I understand that MedShop will confirm my payment prior to shipping to ensure that all payments have been processed appropriately.</span>
+
+<br/>
+<br/>
+
+<!--button to finish order-->
+<button class="btn btn-success bigFont" id="order" disabled>Order <span class="glyphicon glyphicon-chevron-right"></span></button>
+<br/><br/>
+<p><strong>Note: Even if you have already completed payment with PayPal, you must click the Order button to complete your order. Otherwise, we will not receive your order.</strong></p>
+</form>
+
+</div>
+
+<br/><br/>
+
+<footer>
+    <%- include('footer') %>
+</footer>
+
+<!--paypal payment method-->
+<script>
+  paypal.Button.render({
+    env: 'sandbox', // Or 'production'
+    // Set up the payment:
+    // 1. Add a payment callback
+    payment: function(data, actions) {
+      // 2. Make a request to your server
+      return actions.request.post('/my-api/create-payment/')
+        .then(function(res) {
+          // 3. Return res.id from the response
+          return res.id;
+        });
+    },
+    // Execute the payment:
+    // 1. Add an onAuthorize callback
+    onAuthorize: function(data, actions) {
+      // 2. Make a request to your server
+      return actions.request.post('/my-api/execute-payment/', {
+        paymentID: data.paymentID,
+        payerID:   data.payerID
+      })
+        .then(function(res) {
+          // 3. Show the buyer a confirmation message.
+        });
+    }
+  }, '#paypal-button');
+</script>
+
+<script>
+//checks to make sure credit card length is appropriate
+	function checkNum(){
+		var value=document.getElementById("card").value;
+		if(value.length>=13 && value.length<=19) {
+			document.getElementById("order").disabled = false;
+		}
+		else{
+			document.getElementById("order").disabled = true;
+		}
+	}
+</script>
+
+<script>
+//enables ordering for customers using paypal (once they have checked the box to agree)
+	$(document).ready(function() {
+	  $('#check').click(function() {
+		if ($(this).is(':checked')) {
+		  $("#order").prop('disabled', false);
+		}
+		else {
+		  $("#order").prop('disabled', true);
+		}
+	  });
+	});
+</script>
+
+</body>
+</html>

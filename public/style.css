@@ -1,0 +1,291 @@
+body {
+      position: relative;
+	}
+
+#section1 {
+	padding-top:50px;
+	height:700px;
+	color: black;
+	background-image: url("background.jpg");
+	}
+
+#section2 {
+	padding-top:50px;
+	height:600px;
+	color: black;
+	}
+
+#section3 {
+	padding-top:50px;
+	height:600px;
+	color: black;
+	background-image: url("background.jpg")
+	}
+
+#section4 {
+	padding-top:50px;
+	height:600px;
+	color: black;
+	}
+	
+#section5 {
+	padding-top:50px;
+	height:450px;
+	color: black;
+	background-image: url("background.jpg")
+	}
+
+.carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+
+.carousel .item {
+  height: 575px;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 500px;
+}
+
+#myCarousel {
+	margin-top: 10px;
+}
+
+.small {
+	width: 300px;
+	height: 300px;
+}
+
+.xsmall {
+	width: 200px;
+	height: 200px;
+}
+
+.row {
+	text-align: center;
+}
+
+.bigfont {
+	font-size: 16pt;
+}
+
+footer {
+	text-align: center;
+	font-size: 14pt;
+	background-color: #222;
+	color: white;
+	margin: 0px;
+	padding: 10px;
+}
+
+
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  top: -60%;
+  position: absolute;
+}
+
+.logo {
+	height: 150px;
+	width: 150px;
+	margin-top: 0px;
+}
+
+nav {
+	height: 80px;
+	font-size: 16pt;
+	padding: 15px;
+}
+
+.collapse .navbar-collapse {
+	padding: 10px;
+}
+
+h1 {
+	font-weight: bold;
+}
+
+/* The Modal (background) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto; /* 15% from the top and centered */
+padding: 20px;
+border: 1px solid #888;
+width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+input,
+textarea {
+  border: 1px solid #eeeeee;
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 10px;
+}
+
+input[type="button"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-group {
+  clear: both;
+  margin: 15px 0;
+  position: relative;
+}
+
+.input-group input[type='button'] {
+  background-color: #eeeeee;
+  min-width: 38px;
+  width: auto;
+  transition: all 300ms ease;
+}
+
+.input-group .button-minus,
+.input-group .button-plus {
+  font-weight: bold;
+  height: 38px;
+  padding: 0;
+  width: 38px;
+  position: relative;
+}
+
+.input-group .quantity-field {
+  position: relative;
+  height: 38px;
+  left: -6px;
+  text-align: center;
+  width: 62px;
+  display: inline-block;
+  font-size: 13px;
+  margin: 0 0 5px;
+  resize: vertical;
+}
+
+.button-plus {
+  left: -13px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+.modal .modal-content {
+	width: 600px;
+}
+
+.modal-footer {
+	text-align: left;
+}
+
+.red {
+	color: red;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+input[type='checkbox']:checked {
+    background: red;
+}
+
+#bulk, #outCountry {
+	margin: 5px;
+}
+
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
+	display: none;
+	background-color: #f9f9f9;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+#flip{
+	background-color: #428bca;
+	color: white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+#detect {
+	background-color: none;
+	height:100px;
+}
+
+#check {
+	-webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+#check:checked {
+    background: blue;
+}

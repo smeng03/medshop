@@ -1,0 +1,57 @@
+<!--Sabrina Meng Neha Maddali Q4 Project May 19, 2020-->
+
+<!--this page shows the user information once they log into their account-->
+<html>
+<head>
+<title> MedShop </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="medshop.png" />
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<header>
+	<!--header file includes the nav bar-->
+    <%- include('header2') %>
+</header>
+<br/><br/><br/><br/><br/>
+
+<!--display the user information that has been put into the database-->
+<div class = "container">
+	<h1>Account Information</h1>
+	<h3><strong>Username:</strong> <%= user %></h3>
+	<h3><strong>Number of items ordered:</strong> <%= num %></h3>
+	<br/>
+	<h2><strong>My Orders</strong></h2>
+	<br/>
+	
+	<!--displays user's orders for them to see-->
+	<table class="table">
+		<tr>
+			<th>Order Confirmation Number</th>
+			<th>Item Name</th>
+			<th>Quantity</th>
+		</tr>
+		<% for(var i=0; i<data.length; i++) { %>
+			<tr>
+				<td><%= data[i].confNum %></td>
+				<td><%= data[i].itemName %></td>
+				<td><%= data[i].qty %></td>
+			</tr>
+		<% } %>
+	</table>
+</div>
+<br/><br/><br/><br/>
+
+<!--include footer file-->
+<footer>
+    <%- include('footer') %>
+</footer>
+</body>
+</html>
